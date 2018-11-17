@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Button = ({vieillir, ageAAjouter}) => (
+const Button = ({vieillir}) => (
     <button onClick={vieillir}>
     Vieillir de 2 ans
     </button>

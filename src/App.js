@@ -29,10 +29,24 @@ class App extends Component {
     famille
   }
 
-  handleClick = (addAge) => {
+  handleClick = addAge => {
     const famille = { ...this.state.famille }
     famille.membre1.age += addAge
     this.setState({ famille })
+  }
+
+  handleChange = event => {
+    const famille = { ...this.state.famille }
+    const nomFamille = event.target.value
+    famille.membre1.nom = nomFamille
+    this.setState({famille})
+  }
+
+  handleChangeAge = event => {
+    const famille = { ...this.state.famille }
+    const ageMembre = event.target.value
+    famille.membre1.age = ageMembre
+    this.setState({famille})
   }
 
   render() {
@@ -41,7 +55,9 @@ class App extends Component {
     return (
         <div className="App">
           <h1>{titre}</h1>
-          <em>Cette app vous est présentée par : {auteur}</em>
+          <p>Cette app vous est présentée par : {auteur}</p>
+          <input type="text" value={famille.membre1.nom} onChange={this.handleChange}/>
+          <input type="text" value={famille.membre1.age} onChange={this.handleChangeAge}/>
           <Membre
             age={famille.membre1.age} 
             nom={famille.membre1.nom} />
