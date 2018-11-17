@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import Membre from './Components/Membre'
+import Button from './Components/Button'
 
 const famille = {
   membre1: {
@@ -22,9 +23,16 @@ const famille = {
 }
 
 class App extends Component {
+
   
   state = {
     famille
+  }
+
+  handleClick = (addAge) => {
+    const famille = { ...this.state.famille }
+    famille.membre1.age += addAge
+    this.setState({ famille })
   }
 
   render() {
@@ -34,12 +42,23 @@ class App extends Component {
         <div className="App">
           <h1>{titre}</h1>
           <em>Cette app vous est présentée par : {auteur}</em>
-          <Membre nom={famille.membre1.nom} />
-          <Membre nom={famille.membre2.nom} />
-          <Membre nom={famille.membre3.nom} />
-          <Membre nom={famille.membre4.nom} >
+          <Membre
+            age={famille.membre1.age} 
+            nom={famille.membre1.nom} />
+          <Membre
+            age={famille.membre2.age} 
+            nom={famille.membre2.nom} />
+          <Membre
+            age={famille.membre3.age} 
+            nom={famille.membre3.nom} />
+          <Membre
+            age={famille.membre4.age} 
+            nom={famille.membre4.nom} >
             Je suis un chien
           </Membre>
+          <Button 
+            vieillir = {() => this.handleClick(2)}
+          />
         </div>
 
     )
