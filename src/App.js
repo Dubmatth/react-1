@@ -43,6 +43,12 @@ class App extends Component {
     this.setState({famille})
   }
 
+  hideName = id => {
+    const famille = { ...this.state.famille }
+    famille[id].nom = 'X'
+    this.setState({ famille })
+  }
+
   handleChangeAge = event => {
     const famille = { ...this.state.famille }
     const ageMembre = event.target.value
@@ -62,7 +68,17 @@ class App extends Component {
     let description = null
     if (isShow) {
       description = <strong>Je suis un chien</strong>
-    } 
+    }
+    
+    const liste = Object.keys(famille)
+    .map(membre => (
+      <Membre
+        hideName={ () => this.hideName(membre) }
+        age={famille[membre].age} 
+        nom={famille[membre].nom} 
+      />
+    ))
+
 
     return (
         <div className="App">
@@ -70,26 +86,18 @@ class App extends Component {
           <p>Cette app vous est présentée par : {auteur}</p>
           <input type="text" value={famille.membre1.nom} onChange={this.handleChange}/>
           <input type="text" value={famille.membre1.age} onChange={this.handleChangeAge}/>
-          <Membre
-            age={famille.membre1.age} 
-            nom={famille.membre1.nom} />
-          <Membre
-            age={famille.membre2.age} 
-            nom={famille.membre2.nom} />
-          <Membre
-            age={famille.membre3.age} 
-            nom={famille.membre3.nom} />
-          <Membre
+          {liste}
+          {/*<Membre
             age={famille.membre4.age} 
             nom={famille.membre4.nom} >
             { description }
             <button onClick={this.handleShowDescription}>
               { isShow ? 'Cacher' : 'Montrer' }
             </button>
-          </Membre>
-          <Button 
+          </Membre> */}
+          {/* <Button 
             vieillir = {() => this.handleClick(2)}
-          />
+          /> */}
         </div>
 
     )
