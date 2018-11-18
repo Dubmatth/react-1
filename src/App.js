@@ -58,6 +58,12 @@ class App extends Component {
   render() {
     const { titre, auteur } = this.props
     const { famille, isShow } = this.state
+
+    let description = null
+    if (isShow) {
+      description = <strong>Je suis un chien</strong>
+    } 
+
     return (
         <div className="App">
           <h1>{titre}</h1>
@@ -76,10 +82,10 @@ class App extends Component {
           <Membre
             age={famille.membre4.age} 
             nom={famille.membre4.nom} >
-            {
-              isShow ? <strong>Je suis un chien</strong> : null
-            }
-            <button onClick={this.handleShowDescription}>Montrer</button>
+            { description }
+            <button onClick={this.handleShowDescription}>
+              { isShow ? 'Cacher' : 'Montrer' }
+            </button>
           </Membre>
           <Button 
             vieillir = {() => this.handleClick(2)}
