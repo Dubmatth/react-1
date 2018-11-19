@@ -36,10 +36,10 @@ class App extends Component {
     this.setState({ famille })
   }
 
-  handleChange = event => {
+  handleChange = (event, id) => {
     const famille = { ...this.state.famille }
-    const nomFamille = event.target.value
-    famille.membre1.nom = nomFamille
+    const nom = event.target.value
+    famille[id].nom = nom
     this.setState({famille})
   }
 
@@ -49,7 +49,7 @@ class App extends Component {
     this.setState({ famille })
   }
 
-  handleChangeAge = event => {
+  handleChangeAge = (event, id) => {
     const famille = { ...this.state.famille }
     const ageMembre = event.target.value
     famille.membre1.age = ageMembre
@@ -74,6 +74,7 @@ class App extends Component {
     .map(membre => (
       <Membre
         key={membre}
+        handleChange={event => this.handleChange(event, membre)}
         hideName={ () => this.hideName(membre) }
         age={famille[membre].age} 
         nom={famille[membre].nom} 
@@ -85,7 +86,6 @@ class App extends Component {
         <div className="App">
           <h1>{titre}</h1>
           <p>Cette app vous est présentée par : {auteur}</p>
-          <input type="text" value={famille.membre1.nom} onChange={this.handleChange}/>
           <input type="text" value={famille.membre1.age} onChange={this.handleChangeAge}/>
           {liste}
           {/*<Membre
